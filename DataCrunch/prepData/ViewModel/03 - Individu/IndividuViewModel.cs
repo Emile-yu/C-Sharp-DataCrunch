@@ -64,7 +64,7 @@ namespace ViewModel
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.DataFilePath = openFileDialog.FileName;
-                this.OutputPathName = Path.GetFullPath(FilePathManager.getInstance().getPathName(FilePathManager.dataType.Individu, this.DataFilePath));
+                this.OutputPathName = Path.GetFullPath(FilePathManager.getInstance().getPathName(DataType.Individu, this.DataFilePath));
 
             }
         }

@@ -35,7 +35,7 @@ namespace ViewModel
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 this.DataFilePath = openFileDialog.FileName;
-                this.OutputPathName = Path.GetFullPath(FilePathManager.getInstance().getPathName(FilePathManager.dataType.Support, DataFilePath));
+                this.OutputPathName = Path.GetFullPath(FilePathManager.getInstance().getPathName(DataType.Support, DataFilePath));
             }
             /*FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() == DialogResult.OK)

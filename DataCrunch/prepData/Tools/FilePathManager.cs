@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Tools
 {
-   
+    public enum DataType
+    {
+        Support,
+        Ri,
+        Individu,
+        None
+    };
 
     public class FilePathManager
     {
         #region membres
 
-        public enum dataType
-        {
-            Support,
-            Ri,
-            Individu,
-            None
-        };
+       
 
         private static String[] data = { " Support", " Ri", " Individu" };
 
@@ -57,19 +57,19 @@ namespace Tools
         #endregion
 
         #region operations
-        private static String getData(dataType type)
+        private static String getData(DataType type)
         {
             return data[(int)type];
         }
 
-        public String getPathName(dataType type, String InputFileName)
+        public String getPathName(DataType type, String InputFileName)
         {
             if (String.IsNullOrEmpty(InputFileName))
             {
                 throw new Exception("File Name is vide");
             }
 
-            if (type == dataType.None)
+            if (type == DataType.None)
             {
                 throw new Exception("data type is null");
             }
@@ -90,7 +90,7 @@ namespace Tools
 
         }
 
-        public String getFileName(dataType type, String InputFileName)
+        public String getFileName(DataType type, String InputFileName)
         {
             if (String.IsNullOrEmpty(InputFileName))
             {

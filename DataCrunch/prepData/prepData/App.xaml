@@ -7,14 +7,14 @@
             
             <ResourceDictionary.MergedDictionaries>
                 <!--MahApps.Metro-->
-                
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml">
-                </ResourceDictionary>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml">
-                </ResourceDictionary>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml">
-                </ResourceDictionary>
-            <!--resources static-->
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml"/>
+
+                <!--resources static-->
 
                 <ResourceDictionary Source="pack://application:,,,/View;component/Resources/ListBoxResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>

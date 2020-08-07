@@ -62,7 +62,7 @@ namespace Model
                 throw new Exception("File Name is vide"); ;
             }
 
-            this._OutputPathName = FilePathManager.getInstance().getPathName(FilePathManager.dataType.Individu, this._fileName);
+            this._OutputPathName = FilePathManager.getInstance().getPathName(DataType.Individu, this._fileName);
             
             if (!Directory.Exists(this._OutputPathName))
             {

@@ -24,13 +24,5 @@
                                                Transition="LeftReplace" 
                                                Content="{Binding ActiveView}"/>
 
-        <!--
-        <Controls:TransitioningContentControl Grid.Column="1"
-                                               Transition="LeftReplace" 
-                                               Content="{Binding ActiveView}"/> 
-
-
-        <Frame x:Name="MainFrame" Grid.Column="1" Background="#CCCCCC"/>-->
-
     </Grid>
 </Controls:MetroWindow>

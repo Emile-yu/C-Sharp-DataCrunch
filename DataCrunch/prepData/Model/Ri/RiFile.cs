@@ -127,8 +127,8 @@ namespace Model
             //string InputFileName = Path.GetFileName(this._dataFilePath);
 
             //this.OutPath += InputFileName.Split('.')[0] + "_supp_";
-            this._OutputPathName = FilePathManager.getInstance().getPathName(FilePathManager.dataType.Ri, this.DescrFilePath);
-            this._OutputFileName = FilePathManager.getInstance().getFileName(FilePathManager.dataType.Ri, this.DescrFilePath);
+            this._OutputPathName = FilePathManager.getInstance().getPathName(DataType.Ri, this.DescrFilePath);
+            this._OutputFileName = FilePathManager.getInstance().getFileName(DataType.Ri, this.DescrFilePath);
 
             if (!Directory.Exists(this._OutputPathName))
             {

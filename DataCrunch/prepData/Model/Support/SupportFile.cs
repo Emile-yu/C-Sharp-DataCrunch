@@ -51,8 +51,8 @@ namespace Model.Support
                 throw new Exception("File Name is vide"); ;
             }
 
-            this._OutputPathName = FilePathManager.getInstance().getPathName(FilePathManager.dataType.Support, this._fileName);
-            this._OutputFileName = FilePathManager.getInstance().getFileName(FilePathManager.dataType.Support, this._fileName);
+            this._OutputPathName = FilePathManager.getInstance().getPathName(DataType.Support, this._fileName);
+            this._OutputFileName = FilePathManager.getInstance().getFileName(DataType.Support, this._fileName);
             if (!Directory.Exists(this._OutputPathName))
             {
                 Directory.CreateDirectory(this._OutputPathName);

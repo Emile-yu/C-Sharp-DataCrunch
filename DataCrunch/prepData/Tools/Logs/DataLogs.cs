@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace Tools
 {
+    public enum LogType
+    {
+        None,
+        Success
+    };
+
     public class DataLogs
     {
         public String Message { get; private set; }
 
-        public DataLogs(String message)
+        public LogType Type { get; private set; }
+        public DataLogs(LogType type, String message)
         {
+            Type = type;
             Message = message;
         }
     }

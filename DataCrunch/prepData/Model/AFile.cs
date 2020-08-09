@@ -15,19 +15,22 @@ namespace Model
 
         protected String _OutputPathName;
 
+        protected BackgroundWorker _Worker; 
         #region constructor
-        public AFile()
+        public AFile(BackgroundWorker Worker)
         {
             _fileName = "";
             this._OutputFileName = "";
             this._OutputPathName = "";
+            _Worker = Worker;
         }
 
-        public AFile(String fileName)
+        public AFile(String fileName, BackgroundWorker Worker)
         {
             this._fileName = fileName;
             this._OutputFileName = "";
             this._OutputPathName = "";
+            _Worker = Worker;
         }
         #endregion
 
@@ -37,7 +40,6 @@ namespace Model
 
         public abstract void ExportFile();
 
-        public BackgroundWorker worker { protected get; set; }
         #endregion
     }
 }

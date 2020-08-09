@@ -23,10 +23,8 @@ namespace ViewModel
 
         protected override void TreatmentLaunch()
         {
-            SupportFile supportFile = new SupportFile(this.DataFilePath);
-            supportFile.worker = worker;
+            SupportFile supportFile = new SupportFile(this.DataFilePath, worker);
             supportFile.ExportFile();
-            //supportFile.ExportFile(worker.ReportProgress);
         }
 
         protected override void OnBrowshDataPathCommand()

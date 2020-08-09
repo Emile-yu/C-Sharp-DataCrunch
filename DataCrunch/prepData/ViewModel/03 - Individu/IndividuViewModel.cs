@@ -51,8 +51,7 @@ namespace ViewModel
         #region operations override
         protected override void TreatmentLaunch()
         {
-            IndividuFile individuFile = new IndividuFile(this.DataFilePath, Int32.Parse(this.Begin), Int32.Parse(this.End));
-            individuFile.worker = worker;
+            IndividuFile individuFile = new IndividuFile(this.DataFilePath, worker, Int32.Parse(this.Begin), Int32.Parse(this.End));
             individuFile.ExportFile();
 
         }

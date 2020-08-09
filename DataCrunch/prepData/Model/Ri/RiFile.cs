@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Model
 {
@@ -23,7 +24,7 @@ namespace Model
         #endregion
 
         #region conctructor
-        public RiFile(String descrFilePath, String dataFilePath) : base()
+        public RiFile(String descrFilePath, String dataFilePath, BackgroundWorker Worker) : base(Worker)
         {
             DescrFilePath = descrFilePath;
 
@@ -113,6 +114,8 @@ namespace Model
 
         public override void ReadFile()
         {
+            _Worker.ReportProgress(1, new DataLogs(LogType.None, "traitement en cours..."));
+
             LoadDescrFile();
 
             LoadDataFile();
@@ -135,7 +138,6 @@ namespace Model
                 Directory.CreateDirectory(this._OutputPathName);
             }
             //String OutPath = @"./OutFile/ONE NEXT 2020_support_";
-            int countSupport = 0;
 
             foreach (KeyValuePair<int, RiIndividu> item in RiIndividu)
             {
@@ -143,7 +145,7 @@ namespace Model
                 {
                     using (var writer = new StreamWriter(_OutputFileName + item.Key + ".csv"))
                     {
-                       worker.ReportProgress(countSupport++, new DataLogs(String.Format("{0}.csv est généré ...", _OutputFileName + item.Key)));
+                       _Worker.ReportProgress(1, new DataLogs(LogType.None, String.Format("{0}.csv est généré ...", _OutputFileName + item.Key)));
                        foreach (KeyValuePair<string, double> data in item.Value.GetRiIndividu())
                        {
                             writer.WriteLine(item.Key + ";" + data.Key + ";" + data.Value);

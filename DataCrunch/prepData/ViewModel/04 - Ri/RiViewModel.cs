@@ -83,8 +83,7 @@ namespace ViewModel
 
         protected override void TreatmentLaunch()
         {
-            RiFile file = new RiFile(this.DescrFilePath, this.DataFilePath);
-            file.worker = worker;
+            RiFile file = new RiFile(this.DescrFilePath, this.DataFilePath, worker);
             file.ExportFile();
         }
 

@@ -169,7 +169,19 @@ namespace ViewModel
 
             if (logData != null)
             {
-                this.PhaseLogs.Add(new LogItem(logData.Message));
+                switch (logData.Type)
+                {
+                    case LogType.None:
+                        this.PhaseLogs.Add(new LogItem(logData.Message));
+                        break;
+                    case LogType.Success:
+                        if (this.PhaseLogs.Count > 0)
+                            this.PhaseLogs[PhaseLogs.Count - 1] = new LogItem(logData.Message);
+                        break;
+                    default:
+                        break;
+                }
+                
             }
         }
 

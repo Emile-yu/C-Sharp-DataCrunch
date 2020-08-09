@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Model
 {
@@ -18,7 +19,7 @@ namespace Model
         #endregion
 
         #region constructor
-        public IndividuFile(String fileName, int Start, int End) : base(fileName)
+        public IndividuFile(String fileName, BackgroundWorker Worker, int Start, int End) : base(fileName, Worker)
         {
             StartPos = Start;
             EndPos = End;
@@ -50,6 +51,8 @@ namespace Model
                 throw new Exception("The starting position is wrong !");
             }
 
+            _Worker.ReportProgress(1, new DataLogs(LogType.None, "traitement en cours..."));
+
             Individus = File.ReadAllLines(this._fileName, Encoding.GetEncoding("iso-8859-15")).Select(l => l.Substring(this.StartPos, this.EndPos - this.StartPos)).ToList();
 
             //string outPath = @"C:\yu\project\Navigation_UserControl\Navigation_UserControl\bin\Debug\indidivu\" + "Individus.csv";
@@ -70,12 +73,11 @@ namespace Model
             }
             //this._OutputFileName = @"C:\yu\project\Navigation_UserControl\Navigation_UserControl\bin\Debug\individu\Individu";
             this._OutputFileName = _OutputPathName + "\\Individus";
-            int count = 0;
             using (var writer = new StreamWriter(_OutputFileName + ".csv"))
             { 
                 foreach (String data in Individus)
                 {
-                    worker.ReportProgress(count++, new DataLogs(String.Format("{0} a été ajouté ...", data)));
+                    _Worker.ReportProgress(1, new DataLogs(LogType.None, String.Format("{0} a été ajouté ...", data)));
                     writer.WriteLine(data);
                 }
             }

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Model.Support
 {
@@ -15,7 +17,7 @@ namespace Model.Support
         #endregion
 
         #region constructor
-        public SupportFile(String fileName) : base(fileName)
+        public SupportFile(String fileName, BackgroundWorker Worker) : base(fileName, Worker)
         {
             Supports = new Dictionary<string, string[]>();
             ReadFile();
@@ -37,6 +39,8 @@ namespace Model.Support
                 throw new Exception("File Name is vide"); ;
             }
 
+            _Worker.ReportProgress(1, new DataLogs(LogType.None, "traitement en cours..."));
+            
             string[] l_lines = File.ReadAllLines(this._fileName).Where(o => !o.Contains("ID")).ToArray();
 
             Supports = l_lines.GroupBy(l => l.Split(';')[1]).ToDictionary(o => o.Key, o => o.ToArray());
@@ -57,13 +61,12 @@ namespace Model.Support
             {
                 Directory.CreateDirectory(this._OutputPathName);
             }
-
-            int count = 0;
            
             foreach (KeyValuePair<string, string[]> item in Supports)
             {
+                _Worker.ReportProgress(1, new DataLogs(LogType.None, String.Format("{0}.csv est en cours de générer ...", this._OutputFileName + item.Key)));
                 File.WriteAllLines(this._OutputFileName + item.Key + ".csv", item.Value);
-                worker.ReportProgress(count++,new DataLogs(String.Format("{0}.csv est généré ...", this._OutputFileName + item.Key)));
+                _Worker.ReportProgress(1, new DataLogs(LogType.Success, String.Format("{0}.csv est généré ...", this._OutputFileName + item.Key)));
             }
        
         }

@@ -19,17 +19,16 @@ namespace Tools
     {
         #region membres
 
-       
-
         private static String[] data = { " Support", " Ri", " Individu" };
 
         private String yearCurrent = DateTime.Now.Year.ToString();
 
         private String ONENEXT_PathName = @"\ONE NEXT ";
-        private String ONENEXRPRIMIUM__PathName = @"\ONE NEXT PREMIUM ";
-        private String ONENEXT_FileName = @"\ONE NEXT 2020_support_";
-        private String ONENEXRPRIMIUM__FileName = @"\ONE NEXT PREMIUM 2020_support_";
-
+        private String ONENEXRPRIMIUM_PathName = @"\ONE NEXT PREMIUM ";
+        private String ONENEXT_FileName = "";
+        private String ONENEXRPRIMIUM_FileName = "";
+        
+      
         #endregion
 
         #region singleton
@@ -50,9 +49,10 @@ namespace Tools
         private FilePathManager()
         {
             ONENEXT_PathName += yearCurrent;
-            ONENEXRPRIMIUM__PathName += yearCurrent;
-            ONENEXT_FileName = @"\ONE NEXT " + yearCurrent + "_support_";
-            ONENEXRPRIMIUM__FileName = @"\ONE NEXT PREMIUM " + yearCurrent + "_support_";
+            ONENEXT_FileName = ONENEXT_PathName + "_support_";
+
+            ONENEXRPRIMIUM_PathName += yearCurrent;
+            ONENEXRPRIMIUM_FileName = ONENEXRPRIMIUM_PathName + "_support_";
         }
         #endregion
 
@@ -74,19 +74,13 @@ namespace Tools
                 throw new Exception("data type is null");
             }
 
-            /*if (type == dataType.Individu)
-            {
-                return "";
-            }*/
             String pathParent = Directory.GetParent(InputFileName).FullName;
 
             if (InputFileName.ToUpper().Contains("PREMIUM"))
             {
-                return pathParent + ONENEXRPRIMIUM__PathName + getData(type);
+                return pathParent + ONENEXRPRIMIUM_PathName + getData(type);
             }
             return pathParent + ONENEXT_PathName + getData(type);
-
-
 
         }
 
@@ -98,7 +92,7 @@ namespace Tools
             }
             if (InputFileName.ToUpper().Contains("PREMIUM"))
             {
-                return getPathName(type, InputFileName) + ONENEXRPRIMIUM__FileName;
+                return getPathName(type, InputFileName) + ONENEXRPRIMIUM_FileName;
             }
             return getPathName(type, InputFileName) + ONENEXT_FileName;
         }

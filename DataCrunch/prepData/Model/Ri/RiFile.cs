@@ -6,11 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Core;
 
 namespace Model
 {
     public class RiFile : AFile, IContent
     {
+        #region inteface core
+
+        public RiDescrFileDataSource riDescrFileDataSource { get; private set; }
+        public List<RiDescrFile> riDescrFiles { get; set; }
+        #endregion
         #region public properties
 
         public String DescrFilePath { get; private set; }
@@ -36,7 +42,8 @@ namespace Model
 
             ReadFile();
 
-
+            riDescrFileDataSource = new RiDescrFileDataSource(DescrFilePath);
+            riDescrFiles = riDescrFileDataSource.Provider();
         }
         #endregion
 
@@ -51,7 +58,8 @@ namespace Model
         {
             if (String.IsNullOrEmpty(DescrFilePath))
                 throw new Exception("Description file is vide");
-
+            
+            //Charger le fichier directement
             string[] l_lines = File.ReadAllLines(this.DescrFilePath);
             for (int i = 1; i < l_lines.Length; i++)
             {
@@ -70,7 +78,8 @@ namespace Model
                 DescrFileData.Add(new RiDescrFileData(int.Parse(sous_lines[0]), int.Parse(sous_lines[1]), supportId, type));
             }
 
-          
+            /*Charger le fichier par l'interface core, Réduire le couplage*/
+
         }
 
         private void LoadDataFile()
@@ -97,7 +106,8 @@ namespace Model
                         {
                             int supportId = DescrFileData[j].SupportCode;
                             double ri =  Double.Parse(value);
-
+                            if (ri == 0.0)
+                                continue;
                             // ona ajoute les ri pour l'individu et le support
 
                             if (!this.RiIndividu.ContainsKey(supportId))
@@ -148,7 +158,7 @@ namespace Model
                        _Worker.ReportProgress(1, new DataLogs(LogType.None, String.Format("{0}.csv est généré ...", _OutputFileName + item.Key)));
                        foreach (KeyValuePair<string, double> data in item.Value.GetRiIndividu())
                        {
-                            writer.WriteLine(item.Key + ";" + data.Key + ";" + data.Value);
+                            writer.WriteLine(data.Key + ";" + data.Value);
                        }
                     }
                 }

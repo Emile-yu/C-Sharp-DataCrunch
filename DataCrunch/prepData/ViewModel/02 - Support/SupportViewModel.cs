@@ -1,4 +1,5 @@
-﻿using Model.Support;
+﻿using ViewModel.AOP.Interception;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tools;
+using Unity;
 
 namespace ViewModel
 {
@@ -24,10 +26,13 @@ namespace ViewModel
         protected override void TreatmentLaunch()
         {
             SupportFile supportFile = new SupportFile(this.DataFilePath, worker);
+            
+            //IFileProcessor processor = UnityConfigManager.Instance.container.Resolve<IFileProcessor>();
+            //processor.CheckFile(supportFile);
             supportFile.ExportFile();
         }
 
-        protected override void OnBrowshDataPathCommand()
+        protected override void OnBrowshDataPathCommand(object parmater)
         {
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)

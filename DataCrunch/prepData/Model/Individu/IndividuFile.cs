@@ -6,16 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Core;
 
 namespace Model
 {
     public class IndividuFile : AFile, IContent
     {
+        #region private
+        //private IndividuDataSource _individuDataSource;
+        #endregion
+
         #region membre private
         public int StartPos { get; private set; }
+
         public int EndPos { get; private set; }
    
         public List<string> Individus { get; private set; }
+
+        //public List<Individu> Individus { get; private set; }
         #endregion
 
         #region constructor
@@ -53,10 +61,12 @@ namespace Model
 
             _Worker.ReportProgress(1, new DataLogs(LogType.None, "traitement en cours..."));
 
+            //_individuDataSource = new IndividuDataSource(this._fileName, StartPos, EndPos);
+            //Individus = _individuDataSource.Provider();
+
             Individus = File.ReadAllLines(this._fileName, Encoding.GetEncoding("iso-8859-15")).Select(l => l.Substring(this.StartPos, this.EndPos - this.StartPos)).ToList();
 
-            //string outPath = @"C:\yu\project\Navigation_UserControl\Navigation_UserControl\bin\Debug\indidivu\" + "Individus.csv";
-            //File.WriteAllLines(outPath, l_line.ToArray());
+           
         }
         public override void ExportFile()
         {
@@ -74,33 +84,36 @@ namespace Model
             //this._OutputFileName = @"C:\yu\project\Navigation_UserControl\Navigation_UserControl\bin\Debug\individu\Individu";
             this._OutputFileName = _OutputPathName + "\\Individus";
             using (var writer = new StreamWriter(_OutputFileName + ".csv"))
-            { 
+            {
                 foreach (String data in Individus)
+                //foreach (Individu ind in Individus)
                 {
                     _Worker.ReportProgress(1, new DataLogs(LogType.None, String.Format("{0} a été ajouté ...", data)));
                     writer.WriteLine(data);
+                    //_Worker.ReportProgress(1, new DataLogs(LogType.None, String.Format("{0} a été ajouté ...", ind.Serialize())));
+                    //writer.WriteLine(ind.Serialize());
                 }
             }
 
-            /*int count = 0;
-            for (int i = 0; i < _Individus.Count(); ++i)
-            {
-                File.WriteAllText(this._OutputFileName + ".csv", _Individus[i]);
-                reportProgress(count++);
-            }*/
-            //File.WriteAllLines(outPath, l_line.ToArray());
+                /*int count = 0;
+                for (int i = 0; i < _Individus.Count(); ++i)
+                {
+                    File.WriteAllText(this._OutputFileName + ".csv", _Individus[i]);
+                    reportProgress(count++);
+                }*/
+                //File.WriteAllLines(outPath, l_line.ToArray());
 
 
-            /*string[] l_line = File.ReadAllLines(this.FilePath);
-            List<string> res = new List<string>();
-            foreach(string l in l_line)
-            {
-                res.Add(l.Substring(Int32.Parse(this.Begin),Int32.Parse(this.End)).Trim());
+                /*string[] l_line = File.ReadAllLines(this.FilePath);
+                List<string> res = new List<string>();
+                foreach(string l in l_line)
+                {
+                    res.Add(l.Substring(Int32.Parse(this.Begin),Int32.Parse(this.End)).Trim());
+                }
+                string outPath = @"C:\yu\project\ExportId\ExportId\bin\Debug\indidivu\" + "individu.csv";
+
+                File.WriteAllLines(outPath, res.ToArray());*/
             }
-            string outPath = @"C:\yu\project\ExportId\ExportId\bin\Debug\indidivu\" + "individu.csv";
-
-            File.WriteAllLines(outPath, res.ToArray());*/
-        }
         #endregion
     }
 }

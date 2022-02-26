@@ -54,7 +54,7 @@ namespace ViewModel
 
 
         #region operation
-        private void OnBrowshDescrFilePathCommand()
+        private void OnBrowshDescrFilePathCommand(object parmater)
         {
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -66,7 +66,7 @@ namespace ViewModel
         #endregion
 
         #region operations override
-        protected override void OnBrowshDataPathCommand()
+        protected override void OnBrowshDataPathCommand(object parmater)
         {
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -76,7 +76,7 @@ namespace ViewModel
             }
         }
 
-        protected override bool IsPathName()
+        protected override bool IsPathName(object parmater)
         {
             return !String.IsNullOrEmpty(this.DescrFilePath) && !String.IsNullOrEmpty(this.DataFilePath);
         }

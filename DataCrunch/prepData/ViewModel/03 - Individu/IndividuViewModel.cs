@@ -56,7 +56,7 @@ namespace ViewModel
 
         }
 
-        protected override void OnBrowshDataPathCommand()
+        protected override void OnBrowshDataPathCommand(object parmater)
         {
             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
 

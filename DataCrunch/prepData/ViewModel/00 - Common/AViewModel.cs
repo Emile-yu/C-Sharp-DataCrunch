@@ -146,13 +146,13 @@ namespace ViewModel
 
         protected abstract void TreatmentLaunch();
 
-        protected abstract void OnBrowshDataPathCommand();
+        protected abstract void OnBrowshDataPathCommand(object parmater);
 
         #endregion
 
         #region operations
 
-        private void OnStart()
+        private void OnStart(object parmater)
         {
             worker.RunWorkerAsync();
         }
@@ -199,7 +199,7 @@ namespace ViewModel
         }
 
 
-        protected virtual bool IsPathName()
+        protected virtual bool IsPathName(object parmater)
         {
             return !String.IsNullOrEmpty(this.DataFilePath) && this.IsFinish == false;
         }

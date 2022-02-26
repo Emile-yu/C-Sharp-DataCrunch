@@ -70,7 +70,7 @@ namespace ViewModel
             GoToRi = new ActionCommand(GotoRiCommand);
         }
 
-        private void GotoSupportCommand()
+        private void GotoSupportCommand(object parmater)
         {
             //Navigation.Navigate(Navigation.PageSupport, Page1ViewModel);
 
@@ -80,7 +80,7 @@ namespace ViewModel
                 this.ActiveView = l_viewProvider.View;
         }
 
-        private void GotoIndividuCommand()
+        private void GotoIndividuCommand(object parmater)
         {
             //Navigation.Navigate(Navigation.PageIndividu, Page2ViewModel);
 
@@ -90,7 +90,7 @@ namespace ViewModel
                 this.ActiveView = l_viewProvider.View;
         }
 
-        private void GotoRiCommand()
+        private void GotoRiCommand(object parmater)
         {
             //Navigation.Navigate(Navigation.PageRi, Page3ViewModel);
 

@@ -17,6 +17,7 @@
                 <!--resources static-->
 
                 <ResourceDictionary Source="pack://application:,,,/View;component/Resources/ListBoxResources.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>

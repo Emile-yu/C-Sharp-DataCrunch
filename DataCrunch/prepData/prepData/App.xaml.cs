@@ -22,6 +22,8 @@ namespace prepData
             InitializeDocuments();
 
             this.StartupUri = new Uri("pack://application:,,,/View;component/01 - Main/MainView.xaml");
+
+
         }
 
         /// <summary>

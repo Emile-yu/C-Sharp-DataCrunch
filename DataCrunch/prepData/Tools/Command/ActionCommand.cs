@@ -9,15 +9,16 @@ namespace Tools
 {
     public class ActionCommand : ICommand
     {
-        private Action _execute;
+        private Action<object> _execute;
 
-        private Func<bool> _canExecute;
+        private Predicate<object> _canExecute;
 
 
-        public ActionCommand(Action execute) : this(execute, null)
+        public ActionCommand(Action<object> execute) : this(execute, DefaultCanExecute)
         {
+
         }
-        public ActionCommand(Action execute, Func<bool> canExecute)
+        public ActionCommand(Action<object> execute, Predicate<object> canExecute)
         {
             this._execute = execute;
             this._canExecute = canExecute;
@@ -45,12 +46,17 @@ namespace Tools
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : this._canExecute();
+            return (this._canExecute != null && this._canExecute(parameter));
         }
 
         public void Execute(object parameter)
         {
-            this._execute();
+            this._execute(parameter);
+        }
+
+        private static bool DefaultCanExecute(object paramter)
+        {
+            return true;
         }
     }
 }

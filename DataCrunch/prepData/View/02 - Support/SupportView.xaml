@@ -17,7 +17,6 @@
             <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
-
         <Expander Grid.Row="0"
                   Margin="10"
                   Header="{Binding TreatmentsSelectionHeader}"
